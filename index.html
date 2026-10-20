@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MicroTrace | Forensic Hair Analysis</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><span></span><span></span><span></span></div>
+        <div><strong>MicroTrace</strong><small>FORENSIC MICROSCOPY</small></div>
+      </div>
+      <div class="sidebar-label">WORKSPACE</div>
+      <button class="nav-link active" data-view="dashboard"><span>▦</span> Overview</button>
+      <button class="nav-link" data-view="evidence"><span>▤</span> Evidence register <b id="evidenceNavCount">7</b></button>
+      <div class="sidebar-label">ANALYSIS LAB</div>
+      <button class="nav-link" data-view="single"><span>⌕</span> Single hair analysis</button>
+      <button class="nav-link" data-view="compare"><span>⇄</span> Compare two hairs</button>
+      <button class="nav-link" data-view="reports"><span>▧</span> Reports & exports</button>
+      <div class="sidebar-bottom">
+        <div class="status-dot"></div>
+        <div><strong>Prototype environment</strong><small>Local browser workspace</small></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="crumb"><span>MicroTrace</span><i>/</i><strong id="pageTitle">Overview</strong></div>
+        <div class="top-actions"><span class="demo-pill">REFERENCE IMAGES INCLUDED</span><span class="avatar">MT</span></div>
+      </header>
+
+      <section class="view active" id="dashboardView">
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="pulse"></span> FORENSIC IMAGE WORKSPACE</div>
+            <h1>Observe closer.<br><em>Understand the trace.</em></h1>
+            <p>Organize microscopic hair evidence, inspect morphology, calculate measurable features, and compare specimens in one focused workspace.</p>
+            <div class="hero-actions"><button class="btn btn-primary" data-go="single">Start single analysis <span>→</span></button><button class="btn btn-ghost" data-go="compare">Compare two samples</button></div>
+          </div>
+          <div class="hero-art" aria-label="Microscope-inspired abstract graphic">
+            <div class="scope-ring ring-one"></div><div class="scope-ring ring-two"></div><div class="scope-core"><div class="fiber"></div><div class="fiber fiber-two"></div><div class="crosshair">+</div></div>
+            <div class="art-label label-a">MICROSCOPIC VIEW <b>01</b></div><div class="art-label label-b">MORPHOLOGY / TRACE</div>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric-card"><div class="metric-icon teal">▤</div><div class="metric-label">Evidence records</div><div class="metric-value" id="dashboardEvidenceCount">07</div><div class="metric-foot"><span class="tiny-dot"></span> Reference examples</div></article>
+          <article class="metric-card"><div class="metric-icon violet">⌕</div><div class="metric-label">Analysis modes</div><div class="metric-value">02</div><div class="metric-foot">Single + comparison</div></article>
+          <article class="metric-card"><div class="metric-icon amber">∑</div><div class="metric-label">Calculation transparency</div><div class="metric-value">100<span class="percent">%</span></div><div class="metric-foot">Formula and input walkthroughs</div></article>
+          <article class="metric-card"><div class="metric-icon blue">◎</div><div class="metric-label">Classifier status</div><div class="metric-value word-value">Not trained</div><div class="metric-foot">No species claims enabled</div></article>
+        </div>
+
+        <div class="section-heading"><div><div class="eyebrow">QUICK ACCESS</div><h2>Analysis workspace</h2></div><span class="muted">Choose a workflow to begin</span></div>
+        <div class="workflow-grid">
+          <article class="workflow-card" data-go="single"><div class="workflow-symbol">⌕</div><div class="workflow-top"><span class="tag tag-teal">MODE 01</span><span class="arrow">↗</span></div><h3>Single hair analysis</h3><p>Inspect one image for shaft dimensions, medulla visibility, pigmentation, and assessable cuticle features.</p><div class="workflow-footer">One image <span>→</span></div></article>
+          <article class="workflow-card" data-go="compare"><div class="workflow-symbol violet-symbol">⇄</div><div class="workflow-top"><span class="tag tag-violet">MODE 02</span><span class="arrow">↗</span></div><h3>Compare two hairs</h3><p>Analyze both images independently, then compare available measurements and visible characteristics.</p><div class="workflow-footer">Two images <span>→</span></div></article>
+          <article class="workflow-card" data-go="evidence"><div class="workflow-symbol amber-symbol">▤</div><div class="workflow-top"><span class="tag tag-amber">REGISTER</span><span class="arrow">↗</span></div><h3>Evidence register</h3><p>Open the seven reference records or register your own evidence with case and specimen details.</p><div class="workflow-footer">Evidence records <span>→</span></div></article>
+        </div>
+
+        <div class="section-heading recent-heading"><div><div class="eyebrow">PRELOADED EXAMPLES</div><h2>Reference samples</h2></div><button class="text-button" data-go="evidence">View all records →</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Evidence no.</th><th>Specimen</th><th>Analysis focus</th><th>Status</th><th></th></tr></thead><tbody id="dashboardEvidenceRows"></tbody></table></div>
+        <div class="notice"><span class="notice-icon">i</span><div><strong>Prototype notice</strong><p>Reference images and example measurements are illustrative, not laboratory findings. Automated human/animal and species classification is not enabled until a suitable model is trained and validated.</p></div></div>
+      </section>
+
+      <section class="view" id="evidenceView">
+        <div class="page-intro"><div><div class="eyebrow">CASEWORK / REGISTER</div><h1>Evidence register</h1><p>Review reference records or register evidence for analysis.</p></div><button class="btn btn-primary" id="openAddEvidence">＋ Register evidence</button></div>
+        <div class="toolbar"><input id="evidenceSearch" type="search" placeholder="Search evidence no., specimen, or case…"><select id="evidenceFilter"><option value="all">All records</option><option value="demo">Reference samples</option><option value="user">My records</option></select><span id="evidenceCountLabel" class="muted"></span></div>
+        <div class="table-wrap"><table><thead><tr><th>Evidence no.</th><th>Case / specimen</th><th>Image</th><th>Analysis focus</th><th>Record type</th><th></th></tr></thead><tbody id="evidenceRows"></tbody></table></div>
+        <div class="notice"><span class="notice-icon">!</span><div><strong>Evidence integrity</strong><p>This browser prototype stores records locally. Do not use it as a secure chain-of-custody system for real casework.</p></div></div>
+      </section>
+
+      <section class="view" id="singleView">
+        <div class="page-intro"><div><div class="eyebrow">ANALYSIS LAB / MODE 01</div><h1>Single hair analysis</h1><p>Upload a microscopic image or load a reference specimen to explore the workflow.</p></div><span class="tag tag-teal">ONE IMAGE</span></div>
+        <div class="analysis-layout">
+          <div class="panel image-panel">
+            <div class="panel-head"><div><h3>Specimen image</h3><p>Original image remains unchanged</p></div><span class="step-chip">01 / INPUT</span></div>
+            <div class="image-stage" id="singleDrop">
+              <canvas id="singleCanvas" width="900" height="520"></canvas>
+              <div class="upload-placeholder" id="singlePlaceholder"><div class="upload-icon">＋</div><strong>Upload microscopic image</strong><span>JPG, JPEG, PNG</span><label class="btn btn-small btn-ghost">Choose image<input id="singleFile" type="file" accept="image/png,image/jpeg" hidden></label><button class="text-button" id="loadSingleDemo">Load demo specimen</button></div>
+            </div>
+            <div class="image-controls"><span id="singleImageName">No image selected</span><div><button class="icon-button" id="singleFit" title="Fit image">⌗</button><button class="icon-button" id="singleResetImage" title="Clear image">×</button></div></div>
+            <div class="calibration-box"><div class="calibration-head"><div><strong>Scale calibration</strong><small>Required for physical dimensions</small></div><label class="switch"><input type="checkbox" id="singleCalToggle"><span></span></label></div><div class="calibration-fields" id="singleCalFields"><label>Known distance (µm)<input type="number" id="singleKnownDistance" min="0.001" step="any" placeholder="e.g. 100"></label><label>Distance in pixels<input type="number" id="singlePixelDistance" min="0.001" step="any" placeholder="e.g. 250"></label></div><button class="btn btn-small btn-outline" id="applySingleCalibration">Apply calibration</button><p class="field-help" id="singleCalibrationStatus">Uncalibrated: measurements will be reported in pixels.</p></div>
+            <div class="control-row"><label>Segmentation threshold <input id="singleThreshold" type="range" min="30" max="220" value="120"></label><output id="singleThresholdValue">120</output></div>
+            <div class="control-row"><label>Minimum region area <input id="singleMinArea" type="range" min="10" max="1500" step="10" value="100"></label><output id="singleMinAreaValue">100 px²</output></div>
+            <button class="btn btn-primary full-width" id="runSingleAnalysis">Run image analysis <span>→</span></button>
+            <p class="field-help">Browser image processing provides exploratory measurements only. Review all overlays and boundaries.</p>
+          </div>
+          <div class="analysis-results">
+            <div class="panel">
+              <div class="panel-head"><div><h3>Analysis summary</h3><p>Results from the current image</p></div><span id="singleStatus" class="status-tag">Awaiting image</span></div>
+              <div class="result-grid">
+                <div class="result-tile"><span>Detected regions</span><strong id="singleRegionCount">—</strong><small>Image components</small></div>
+                <div class="result-tile"><span>Largest region area</span><strong id="singleLargestArea">—</strong><small id="singleAreaUnit">pixels²</small></div>
+                <div class="result-tile"><span>Estimated elongation</span><strong id="singleElongation">—</strong><small>Geometry screening</small></div>
+                <div class="result-tile"><span>Medullary index</span><strong id="singleMI">—</strong><small id="singleMIStatus">Not calculated</small></div>
+              </div>
+              <div class="subsection"><div class="subsection-head"><h4>Medulla assessment</h4><span class="mini-badge">Conditional calculation</span></div><div id="singleMedullaState" class="empty-result">Run analysis to assess whether a medulla can be measured.</div><div id="singleCalculation" class="calculation-box hidden"></div></div>
+              <div class="subsection"><div class="subsection-head"><h4>Observed image features</h4><span class="muted small">Image-derived</span></div><div class="feature-list" id="singleFeatures"><div class="empty-result">No observations yet.</div></div></div>
+              <div class="subsection"><div class="subsection-head"><h4>Interpretation & limitations</h4></div><div class="notice compact"><span class="notice-icon">i</span><div><strong>Classification unavailable</strong><p>Geometry and color alone cannot establish whether a hair is human or animal. A validated model and reference dataset are required.</p></div></div></div>
+              <div class="panel-actions"><button class="btn btn-outline" id="saveSingleResult">Save to evidence</button><button class="btn btn-ghost" id="exportSingleJson">Export JSON</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="compareView">
+        <div class="page-intro"><div><div class="eyebrow">ANALYSIS LAB / MODE 02</div><h1>Compare two hairs</h1><p>Each image is assessed independently before the available features are compared.</p></div><span class="tag tag-violet">TWO IMAGES</span></div>
+        <div class="compare-upload-grid">
+          <div class="panel">
+            <div class="panel-head"><div><h3>Image A</h3><p>Reference specimen</p></div><span class="step-chip">A</span></div>
+            <div class="image-stage compare-stage" id="compareDropA"><canvas id="compareCanvasA" width="700" height="400"></canvas><div class="upload-placeholder" id="comparePlaceholderA"><div class="upload-icon">A</div><strong>Choose Image A</strong><label class="btn btn-small btn-ghost">Choose image<input id="compareFileA" type="file" accept="image/png,image/jpeg" hidden></label><button class="text-button" id="loadCompareDemoA">Load demo A</button></div></div>
+            <div class="image-controls"><span id="compareNameA">No image selected</span><button class="icon-button" id="clearCompareA">×</button></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><h3>Image B</h3><p>Comparison specimen</p></div><span class="step-chip">B</span></div>
+            <div class="image-stage compare-stage" id="compareDropB"><canvas id="compareCanvasB" width="700" height="400"></canvas><div class="upload-placeholder" id="comparePlaceholderB"><div class="upload-icon">B</div><strong>Choose Image B</strong><label class="btn btn-small btn-ghost">Choose image<input id="compareFileB" type="file" accept="image/png,image/jpeg" hidden></label><button class="text-button" id="loadCompareDemoB">Load demo B</button></div></div>
+            <div class="image-controls"><span id="compareNameB">No image selected</span><button class="icon-button" id="clearCompareB">×</button></div>
+          </div>
+        </div>
+        <div class="panel compare-settings"><div><h3>Comparison settings</h3><p>Set physical calibration separately if the images use different scales.</p></div><div class="compare-actions"><button class="btn btn-outline" id="analyzeCompare">Analyze and compare</button><button class="btn btn-primary" id="exportCompare">Export comparison JSON</button></div></div>
+        <div class="panel" id="compareResultsPanel"><div class="panel-head"><div><h3>Feature comparison</h3><p>Only valid, available measurements are compared</p></div><span id="compareStatus" class="status-tag">Awaiting images</span></div><div id="compareResults" class="empty-result">Load two images to begin. Similarity does not establish common source identity.</div></div>
+      </section>
+
+      <section class="view" id="reportsView">
+        <div class="page-intro"><div><div class="eyebrow">OUTPUT / DOCUMENTATION</div><h1>Reports & exports</h1><p>Review saved analyses and generate a printable summary.</p></div></div>
+        <div class="panel"><div class="panel-head"><div><h3>Saved analysis results</h3><p>Results saved in this browser session or local storage</p></div><button class="btn btn-outline" id="refreshReports">Refresh</button></div><div id="reportList" class="report-list"><div class="empty-result">No analysis results saved yet.</div></div></div>
+        <div class="notice"><span class="notice-icon">i</span><div><strong>PDF output</strong><p>Reports can be reviewed on screen or downloaded directly as PDF.</p></div></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="addEvidenceDialog" class="modal">
+    <form id="addEvidenceForm" method="dialog">
+      <div class="modal-head"><div><div class="eyebrow">NEW RECORD</div><h2>Register evidence</h2></div><button type="button" class="icon-button" id="closeAddEvidence">×</button></div>
+      <div class="form-grid"><label>Case ID<input id="newCaseId" required placeholder="e.g. MT-CASE-008"></label><label>Evidence number<input id="newEvidenceNo" required placeholder="e.g. MT-EV-008"></label><label class="span-two">Specimen description<input id="newSpecimen" required placeholder="e.g. Unknown hair specimen"></label><label>Examiner / collector<input id="newExaminer" placeholder="Name or initials"></label><label>Collection location<input id="newLocation" placeholder="If known"></label><label class="span-two">Notes<textarea id="newNotes" rows="3" placeholder="Record relevant information…"></textarea></label></div>
+      <div class="modal-actions"><button type="button" class="btn btn-ghost" id="cancelAddEvidence">Cancel</button><button type="submit" class="btn btn-primary">Create record</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="evidenceDetailDialog" class="modal detail-modal">
+    <div class="modal-head"><div><div class="eyebrow">EVIDENCE PROFILE</div><h2 id="detailTitle">Evidence record</h2></div><button class="icon-button" id="closeDetail">×</button></div>
+    <div id="detailContent"></div><div class="modal-actions"><button class="btn btn-ghost" id="detailCloseBottom">Close</button><button class="btn btn-outline" id="viewEvidenceReportFromModal" type="button">View latest report</button><button class="btn btn-primary" id="analyzeSelectedEvidence">Open in single analysis →</button></div>
+  </dialog>
+  <dialog id="reportDetailDialog" class="modal report-detail-modal">
+    <div class="modal-head"><div><div class="eyebrow">REPORT / REVIEW</div><h2 id="reportDetailTitle">Analysis report</h2></div><button class="icon-button" id="closeReportDetail">×</button></div>
+    <div id="reportDetailContent"></div>
+    <div class="modal-actions"><button class="btn btn-ghost" id="reportDetailCloseBottom">Close</button><button class="btn btn-primary" id="downloadReportPdfFromView">Download PDF ↓</button></div>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
